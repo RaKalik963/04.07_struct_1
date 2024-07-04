@@ -4,8 +4,15 @@ using namespace std;
 
 struct Box
 {
-	int _width = ;
-	int _height;
+private:
+	int* _width;
+	int* _height;
+public:
+	Box()
+	{
+		_width = nullptr;
+		_height = nullptr;
+	}
 	
 };
 
@@ -14,7 +21,7 @@ struct Box
 
 int main()
 {
-	Box rectangle = {};
+	Box  = {};
 	system("pause");
 	return 0;
 }
