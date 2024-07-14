@@ -2,37 +2,60 @@
 #include <Windows.H>
 using namespace std;
 
-struct Box
-{
-	int width;
-	int height;
-	int x;
-	int y;
+
+struct MyRectangle {
+    int x;
+    int y;
+    int width;
+    int height;
 };
-void change_size(Box& rectangle, int newWidth, int newHeight)
-{
-	rectangle.width = newWidth;
-	rectangle.height = newHeight;
-}
-void move_rect(Box& rectangle, int x, int y)
-{
-	rectangle.x = x;
-	rectangle.y = y;
-}
-void print_rectangle(Box& rectangle)
-{
-	int x
-}
 
 
+void changeSize(MyRectangle& rect, int newWidth, int newHeight) {
+    rect.width = newWidth;
+    rect.height = newHeight;
+}
+
+void gotoxy(int x, int y) {
+    COORD pos = { x, y };
+    HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(output, pos);
+}
+
+void moveRect(MyRectangle& rect, int x, int y)
+{
+    rect.x = x;
+    rect.y = y;
+}
+
+void printRect(MyRectangle& rect) {
+    int x = rect.x;
+    int y = rect.y;
+    for (int i = 0; i < rect.height; ++i) {
+        gotoxy(x, y);
+        for (int j = 0; j < rect.width; ++j) {
+            if (i == 0 || i == rect.height - 1 || j == 0 || j == rect.width - 1) {
+                cout << '*';
+            }
+            else {
+                cout << ' ';
+            }
+        }
+        y++;
+    }
+    cout << endl;
+}
 
 int main() {
-	Box rectangle;
-	rectangle.width = 10;
-	rectangle.height = 5;
-	rectangle.x = 3;
-	rectangle.y = 2;
-
-	system("pause");
-	return 0;
+    MyRectangle rect = { 0,0,6,4 };
+    printRect(rect);
+    system("pause");
+    system("cls");
+    moveRect(rect, 10, 12);
+    printRect(rect);
+    system("pause");
+    system("cls");
+    changeSize(rect, 20, 10);
+    printRect(rect);
+    return 0;
 }
